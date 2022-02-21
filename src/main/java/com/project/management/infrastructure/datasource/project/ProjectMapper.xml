@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.management.infrastructure.datasource.project.ProjectMapper">
+
+  <sql id="projectCore">
+    SELECT
+      案件.案件名 as "projectName.value",
+      案件.クライアント名 as "clientName.value",
+      案件.担当者名 as "picName.value",
+      進捗.状態 as "status",
+      提示金額.提示金額 as "amount.offerAmount.value",
+      受注金額.受注金額 as "amount.contractAmount.value",
+      案件スケジュール.開始 as "schedule.from",
+      案件スケジュール.終了 as "schedule.to"
+    FROM 案件.案件
+        INNER JOIN 期間.案件スケジュール ON 案件.案件名 = 案件スケジュール.案件名
+        INNER JOIN 進捗.進捗 ON 案件.案件名 = 進捗.案件名
+        LEFT OUTER JOIN 金額.提示金額 ON 案件.案件名 = 提示金額.案件名
+        LEFT OUTER JOIN 金額.受注金額 ON 案件.案件名 = 受注金額.案件名
+  </sql>
+  <select id="searchProjectList" resultType="com.project.management.domain.model.project.Project">
+    <include refid="projectCore"/>
+    WHERE 案件.案件名 || 案件.クライアント名 || 進捗.状態 LIKE '%' || #{keyword.value} || '%'
+    ORDER BY 案件.createdAt
+  </select>
+
+  <select id="findBy" resultType="com.project.management.domain.model.project.Project">
+    <include refid="projectCore"/>
+    WHERE 案件.案件名 = #{projectName.value}
+  </select>
+</mapper>

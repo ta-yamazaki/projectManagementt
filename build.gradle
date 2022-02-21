@@ -1,0 +1,58 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'org.dddjava.jig-gradle-plugin' version '2022.2.3'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+sourceSets {
+    main {
+        resources.srcDirs = ["src/main/java", "src/main/resources"]
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    runtimeOnly 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.1'
+    runtimeOnly 'com.h2database:h2'
+
+    testImplementation('com.github.irof:jig-erd:latest.release')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+[compileJava, processResources]*.shouldRunAfter(clean)
+
+//JIG
+jig {
+    modelPattern = ".+\\.model\\..+"
+}
+
+jigReports.dependsOn(clean, classes)
+
+task document(type: Copy, dependsOn: jigReports) {
+    from 'build/jig'
+    into 'src/main/resources/static/document/jig'
+}
+
+task documentWithErd(type: Test, dependsOn: document) {
+    useJUnitPlatform()
+    include '**/Erd**'
+}
+
+[document, documentWithErd]*.group('jig')
