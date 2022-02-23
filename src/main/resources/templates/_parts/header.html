@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="default">
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <!--      <a class="navbar-item link " href="/">-->
+            <!--        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">-->
+            <!--      </a>-->
+            <a th:href="@{/}" class="navbar-item">
+                <h1 class="has-text-white title is-4 m-3">案件管理</h1>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <!--        <a th:href="@{/}" class="navbar-item link is-info">-->
+                <!--          トップ-->
+                <!--        </a>-->
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

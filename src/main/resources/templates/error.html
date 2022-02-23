@@ -4,21 +4,30 @@
   <title></title>
 </head>
 <body>
-<main>
-  <article>
-    <h3 th:inline="text">([[${status}]]) [[${error}]]</h3>
-    <p th:text="'path: ' + ${path}"></p>
-    <p th:text="${message}"></p>
-    <p th:text="${timestamp}"></p>
-  </article>
-  <article>
-    <p th:text="'exception: ' + ${exception}"></p>
-    <p th:text="'errors: ' + ${errors}"></p>
-    <details>
-      <summary>スタックトレース</summary>
-      <p th:text="'trace: ' + ${trace}"></p>
-    </details>
-  </article>
+
+<header th:replace="_parts/header :: default"></header>
+
+<main class="container">
+  <section class="section">
+    <article>
+      <h3 th:inline="text">([[${status}]]) [[${error}]]</h3>
+      <p th:text="'path: ' + ${path}"></p>
+      <p th:text="${message}"></p>
+      <p th:text="${timestamp}"></p>
+    </article>
+    <br>
+    <article>
+      <p th:text="'exception: ' + ${exception}"></p>
+      <p th:text="'errors: ' + ${errors}"></p>
+      <details>
+        <summary>スタックトレース</summary>
+        <p th:text="'trace: ' + ${trace}"></p>
+      </details>
+    </article>
+  </section>
 </main>
+
+<footer th:replace="_parts/footer :: default"></footer>
+
 </body>
 </html>
