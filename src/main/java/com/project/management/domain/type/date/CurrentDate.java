@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 /**
  * 現在日
- * （状態の時点を表現するクラス）
  */
 public class CurrentDate {
     LocalDate value;

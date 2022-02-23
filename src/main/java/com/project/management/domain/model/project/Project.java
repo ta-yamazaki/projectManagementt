@@ -1,10 +1,15 @@
 package com.project.management.domain.model.project;
 
 import com.project.management.domain.model.amount.Amount;
+import com.project.management.domain.model.amount.ContractAmount;
+import com.project.management.domain.model.amount.OfferAmount;
 import com.project.management.domain.model.client.ClientName;
 import com.project.management.domain.model.progress.Status;
 import com.project.management.domain.model.schedule.Schedule;
+import com.project.management.domain.type.date.CurrentDate;
 import com.project.management.domain.type.text.NonValueLetter;
+
+import java.time.LocalDate;
 
 /**
  * 案件
@@ -17,7 +22,7 @@ public class Project {
     Amount amount;
     Schedule schedule;
 
-    Project() {
+    public Project() {
     }
 
     public Project(ProjectName projectName, ClientName clientName, Status status, PicName picName, Amount amount, Schedule schedule) {
@@ -27,6 +32,17 @@ public class Project {
         this.picName = picName;
         this.amount = amount;
         this.schedule = schedule;
+    }
+
+    public static Project newProject() {
+        return new Project(
+                new ProjectName(),
+                new ClientName(),
+                Status.init(),
+                new PicName(),
+                new Amount(),
+                new Schedule(LocalDate.now(), LocalDate.now().plusMonths(3))
+        );
     }
 
     public String projectName() {

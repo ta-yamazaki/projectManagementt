@@ -12,6 +12,10 @@ public enum Status {
     失注,
     ;
 
+    public static Status init() {
+        return 引き合い;
+    }
+
     @Override
     public String toString() {
         return name();

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head th:replace="_parts/head :: head">
+  <title></title>
+</head>
+<body>
+
+<header th:replace="_parts/header :: default"></header>
+
+<main class="container">
+    <section class="section">
+      <form method="post" th:action="@{/projects/register}" th:object="${project}">
+          <div class="field">
+              <label class="label">案件名</label>
+              <input class="input" type="text" th:field="*{projectName.value}" placeholder="案件名">
+              <p th:if="${#fields.hasErrors('projectName.value')}"
+                 th:errors="*{projectName.value}"
+                 class="help is-danger"></p>
+          </div>
+
+          <div class="field">
+              <label class="label">クライアント</label>
+              <input class="input" type="text" th:field="*{clientName.value}" placeholder="クライアント">
+              <p th:if="${#fields.hasErrors('clientName.value')}"
+                 th:errors="*{clientName.value}"
+                 class="help is-danger"></p>
+          </div>
+
+          <div class="field">
+              <label class="label">担当者</label>
+              <input class="input" type="text" th:field="*{picName.value}" placeholder="担当者">
+              <p th:if="${#fields.hasErrors('picName.value')}"
+                 th:errors="*{picName.value}"
+                 class="help is-danger"></p>
+          </div>
+
+          <div class="field">
+              <label class="label">案件開始</label>
+              <input class="input" type="date" th:field="*{schedule.from}">
+              <p th:if="${#fields.hasErrors('schedule.from')}"
+                 th:errors="*{schedule.from}"
+                 class="help is-danger"></p>
+          </div>
+
+          <div class="field">
+              <label class="label">案件終了</label>
+              <input class="input" type="date" th:field="*{schedule.to}">
+              <p th:if="${#fields.hasErrors('schedule.to')}"
+                 th:errors="*{schedule.to}"
+                 class="help is-danger"></p>
+          </div>
+
+      </form>
+    </section>
+</main>
+
+<footer th:replace="_parts/footer :: default"></footer>
+
+<link th:href="@{/bulma/bulma-calendar.css}" rel="stylesheet">
+<script th:src="@{/bulma/bulma-calendar.js}"></script>
+<script>
+    // Initialize all input of type date
+    var calendars = bulmaCalendar.attach('[type="date"]');
+
+    // // Loop on each calendar initialized
+    // for(var i = 0; i < calendars.length; i++) {
+    //     // Add listener to select event
+    //     calendars[i].on('select', date => {
+    //         console.log(date);
+    //     });
+    // }
+    //
+    // // To access to bulmaCalendar instance of an element
+    // var element = document.querySelector('#my-element');
+    // if (element) {
+    //     // bulmaCalendar instance is available as element.bulmaCalendar
+    //     element.bulmaCalendar.on('select', function(datepicker) {
+    //         console.log(datepicker.data.value());
+    //     });
+    // }
+</script>
+</body>
+</html>
