@@ -1,9 +1,12 @@
 package com.project.management.domain.model.amount;
 
+import javax.validation.constraints.Min;
+
 /**
  * 提示金額
  */
 public class OfferAmount {
+    @Min(value = 0, message = "0以上の数値を入力してください")
     int value;
 
     public OfferAmount() {

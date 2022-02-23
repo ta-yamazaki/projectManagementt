@@ -1,12 +1,20 @@
 package com.project.management.domain.model.schedule;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
  * 案件の期間
  */
 public class Schedule {
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate from;
+
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate to;
 
     public Schedule() {

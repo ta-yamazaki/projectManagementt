@@ -2,11 +2,15 @@ package com.project.management.domain.model.amount;
 
 import com.project.management.domain.type.text.NonValueLetter;
 
+import javax.validation.Valid;
+
 /**
  * 案件の金額
  */
 public class Amount {
+    @Valid
     OfferAmount offerAmount;
+    @Valid
     ContractAmount contractAmount;
 
     public Amount() {

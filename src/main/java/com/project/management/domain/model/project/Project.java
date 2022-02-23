@@ -8,18 +8,24 @@ import com.project.management.domain.model.progress.Status;
 import com.project.management.domain.model.schedule.Schedule;
 import com.project.management.domain.type.date.CurrentDate;
 import com.project.management.domain.type.text.NonValueLetter;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 /**
  * 案件
  */
 public class Project {
+    @Valid
     ProjectName projectName;
+    @Valid
     ClientName clientName;
     Status status;
+    @Valid
     PicName picName;
     Amount amount;
+    @Valid
     Schedule schedule;
 
     public Project() {

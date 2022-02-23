@@ -7,6 +7,8 @@ import com.project.management.domain.model.project.ProjectList;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,14 +44,13 @@ public class ProjectRegisterController {
 
     @PostMapping
     String register(Model model,
-                    @ModelAttribute("project") Project project) {
+                    @Validated @ModelAttribute("project") Project project,
+                    BindingResult result) {
+        if (result.hasErrors()) return "project/register/input";
+
 //        projectService.register(project);
         System.out.println(project);
-        return "redirect:/projects/register/complete";
+        return "redirect:/projects";
     }
 
-    @GetMapping("/complete")
-    String complete(Model model) {
-        return "project/register/complete";
-    }
 }
